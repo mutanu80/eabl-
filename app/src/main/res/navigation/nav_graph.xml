@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splash2">
+
+    <fragment
+        android:id="@+id/splash2"
+        android:name="com.example.eabl.View.Splash.splash2"
+        android:label="fragment_splash2"
+        tools:layout="@layout/fragment_splash2" >
+        <action
+            android:id="@+id/action_splash2_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+        <action
+            android:id="@+id/action_splash2_to_lookUpFragment2"
+            app:destination="@id/lookUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.eabl.View.onboarding.ViewPagerFragment"
+        android:label="ViewPagerFragment" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_lookUpFragment"
+            app:destination="@id/lookUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lookUpFragment"
+        android:name="com.example.eabl.View.NewUser.LookUpFragment"
+        android:label="fragment_look_up"
+        tools:layout="@layout/fragment_look_up" >
+        <action
+            android:id="@+id/action_lookUpFragment_to_createYourAccountFragment"
+            app:destination="@id/createYourAccountFragment" />
+        <action
+            android:id="@+id/action_lookUpFragment_to_existingMemberFragment"
+            app:destination="@id/existingMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createYourAccountFragment"
+        android:name="com.example.eabl.View.NewUser.createYourAccountFragment"
+        android:label="fragment_create_your_account"
+        tools:layout="@layout/fragment_create_your_account" >
+        <action
+            android:id="@+id/action_createYourAccountFragment_to_deviceVerificationFragment"
+            app:destination="@id/deviceVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginToAccountFragment"
+        android:name="com.example.eabl.View.ExistingMember.LoginToAccountFragment"
+        android:label="fragment_login_to_your_account2"
+        tools:layout="@layout/fragment_login_to_your_account2" >
+        <action
+            android:id="@+id/action_loginToAccountFragment_to_memberCreateNewPasswordFragment"
+            app:destination="@id/memberCreateNewPasswordFragment" />
+        <action
+            android:id="@+id/action_loginToAccountFragment_to_createYourAccountFragment"
+            app:destination="@id/createYourAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberAccountFoundFragment"
+        android:name="com.example.eabl.View.ExistingMember.MemberAccountFoundFragment"
+        android:label="MemberAccountFoundFragment" >
+        <action
+            android:id="@+id/action_memberAccountFoundFragment_to_deviceVerificationFragment"
+            app:destination="@id/deviceVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwrdCreationSuccessFragment"
+        android:name="com.example.eabl.ExistingUser.passwrdCreationSuccessFragment"
+        android:label="passwrdCreationSuccessFragment" >
+        <action
+            android:id="@+id/action_passwrdCreationSuccessFragment_to_newMemberLoginFragment"
+            app:destination="@id/newMemberLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberCreateNewPasswordFragment"
+        android:name="com.example.eabl.View.ExistingMember.MemberCreateNewPasswordFragment"
+        android:label="fragment_create_new_password2"
+        tools:layout="@layout/fragment_create_new_password2" >
+        <action
+            android:id="@+id/action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment"
+            app:destination="@id/passwrdCreationSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/existingMemberFragment"
+        android:name="com.example.eabl.View.ExistingMember.ExistingMemberFragment"
+        android:label="ExistingMemberFragment" >
+        <action
+            android:id="@+id/action_existingMemberFragment_to_memberAccountFoundFragment"
+            app:destination="@id/memberAccountFoundFragment" />
+        <action
+            android:id="@+id/action_existingMemberFragment_to_lookUpFragment"
+            app:destination="@id/lookUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newMemberLoginFragment"
+        android:name="com.example.eabl.View.NewUser.NewMemberLoginFragment"
+        android:label="NewMemberLoginFragment" >
+        <action
+            android:id="@+id/action_newMemberLoginFragment_to_createYourAccountFragment"
+            app:destination="@id/createYourAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deviceVerificationFragment"
+        android:name="com.example.eabl.View.NewUser.DeviceVerificationFragment"
+        android:label="fragment_device_verification"
+        tools:layout="@layout/fragment_device_verification" >
+        <action
+            android:id="@+id/action_deviceVerificationFragment_to_loginToAccountFragment"
+            app:destination="@id/loginToAccountFragment" />
+    </fragment>
+</navigation>
