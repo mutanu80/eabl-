@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "106906785524",
+    "project_id": "eabl-c10cc",
+    "storage_bucket": "eabl-c10cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106906785524:android:056a0b52e432816f1af0a1",
+        "android_client_info": {
+          "package_name": "com.example.eabl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106906785524-ksl94phjb6flhid6u5rja3pi2e9ihtvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmy-hW855qeKE3k5FjVzZf_XFukkSpyM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106906785524-ksl94phjb6flhid6u5rja3pi2e9ihtvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

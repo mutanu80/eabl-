@@ -42,6 +42,23 @@
     <string name="password_text">Password</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="login_text">Login</string>
-
-
+    <string name="best_wines">Best wines now discount up to 30%</string>
+    <string name="get_wine">get the wine of your choice with discount buy now or cry later</string>
+    <string name="shop">Shop Now</string>
+    <string name="vinest_black">Vinest Black Prime 750ml</string>
+    <string name="vinest_gold">Vinest Gold Blanc 750ml</string>
+    <string name="did_not_get_code_resend_in_20_second">Didn`t get code? Resend in %1$s seconds</string>
+    <string name="resend_code">Resend Code</string>
+    <string-array name="years">
+        <item>2022</item>
+        <item>2021</item>
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+        <item>2016</item>
+        <item>2015</item>
+        <item>2014</item>
+        <item>2013</item>
+    </string-array>
 </resources>

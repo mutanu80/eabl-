@@ -9,13 +9,13 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.onboarding.ThirdScreen"
+    tools:context=".view.onboarding.ThirdScreen"
     android:background="@drawable/mask5">
 
     <TextView
         android:layout_width="302dp"
         android:layout_height="106dp"
-        android:layout_marginTop="424dp"
+        android:layout_marginTop="484dp"
         android:layout_marginEnd="37dp"
         android:layout_marginStart="36dp"
         android:text="@string/slide_title3"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="37dp"
         android:layout_marginStart="36dp"
         android:layout_height="64dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="36dp"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -63,6 +63,15 @@
         >
 
     </androidx.appcompat.widget.AppCompatButton>
+
+    <ImageView
+        android:id="@+id/tint2"
+        android:layout_width="match_parent"
+        android:layout_height="368dp"
+        android:src="@drawable/tint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 
 

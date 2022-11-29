@@ -17,5 +17,14 @@
     <color name="gray">#656565</color>
     <color name="black2">#1E1E1E</color>
     <color name="newGray">#999999</color>
+    <color name= "sweetPink">#9A005D</color>
+    <color name="pinkDull">#CE004A</color>
+    <color name="yellow">#FFCC00</color>
+    <color name= "anotherWhite">#C2004600</color>
+    <color name="anotherGray">#F2F2F2</color>
+    <color name="orangeOpacity">#12DC890D</color>
+    <color name="maroonOpacity">#12CE004A</color>
+
+
 
 </resources>

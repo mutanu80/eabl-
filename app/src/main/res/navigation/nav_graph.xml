@@ -7,29 +7,39 @@
 
     <fragment
         android:id="@+id/splash2"
-        android:name="com.example.eabl.View.Splash.splash2"
+        android:name="com.example.eabl.ui.view.splash.Splash2"
         android:label="fragment_splash2"
-        tools:layout="@layout/fragment_splash2" >
+        tools:layout="@layout/fragment_splash2">
         <action
             android:id="@+id/action_splash2_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
+            app:destination="@id/viewPagerFragment"
+            app:exitAnim="@anim/exit_right_anim"
+            app:popUpTo="@id/splash2"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splash2_to_lookUpFragment2"
             app:destination="@id/lookUpFragment" />
+        <action
+            android:id="@+id/action_splash2_to_lookUpFragment"
+            app:destination="@id/lookUpFragment"
+            app:popUpTo="@id/splash2"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.example.eabl.View.onboarding.ViewPagerFragment"
-        android:label="ViewPagerFragment" >
+        android:name="com.example.eabl.ui.view.onboarding.ViewPagerFragment"
+        android:label="ViewPagerFragment">
         <action
             android:id="@+id/action_viewPagerFragment_to_lookUpFragment"
-            app:destination="@id/lookUpFragment" />
+            app:destination="@id/lookUpFragment"
+            app:popUpTo="@id/viewPagerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/lookUpFragment"
-        android:name="com.example.eabl.View.NewUser.LookUpFragment"
+        android:name="com.example.eabl.ui.view.newUser.LookUpFragment"
         android:label="fragment_look_up"
-        tools:layout="@layout/fragment_look_up" >
+        tools:layout="@layout/fragment_look_up">
         <action
             android:id="@+id/action_lookUpFragment_to_createYourAccountFragment"
             app:destination="@id/createYourAccountFragment" />
@@ -39,76 +49,223 @@
     </fragment>
     <fragment
         android:id="@+id/createYourAccountFragment"
-        android:name="com.example.eabl.View.NewUser.createYourAccountFragment"
+        android:name="com.example.eabl.ui.view.newUser.CreateYourAccountFragment"
         android:label="fragment_create_your_account"
-        tools:layout="@layout/fragment_create_your_account" >
+        tools:layout="@layout/fragment_create_your_account">
         <action
             android:id="@+id/action_createYourAccountFragment_to_deviceVerificationFragment"
             app:destination="@id/deviceVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginToAccountFragment"
-        android:name="com.example.eabl.View.ExistingMember.LoginToAccountFragment"
+        android:name="com.example.eabl.ui.view.existingMember.LoginToAccountFragment"
         android:label="fragment_login_to_your_account2"
-        tools:layout="@layout/fragment_login_to_your_account2" >
+        tools:layout="@layout/fragment_login_to_account">
         <action
             android:id="@+id/action_loginToAccountFragment_to_memberCreateNewPasswordFragment"
             app:destination="@id/memberCreateNewPasswordFragment" />
-        <action
-            android:id="@+id/action_loginToAccountFragment_to_createYourAccountFragment"
-            app:destination="@id/createYourAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberAccountFoundFragment"
-        android:name="com.example.eabl.View.ExistingMember.MemberAccountFoundFragment"
-        android:label="MemberAccountFoundFragment" >
+        android:name="com.example.eabl.ui.view.existingMember.MemberAccountFoundFragment"
+        android:label="MemberAccountFoundFragment">
         <action
-            android:id="@+id/action_memberAccountFoundFragment_to_deviceVerificationFragment"
-            app:destination="@id/deviceVerificationFragment" />
+            android:id="@+id/action_memberAccountFoundFragment_to_firstLoginDeviceVerificationFragment"
+            app:destination="@id/firstLoginDeviceVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwrdCreationSuccessFragment"
         android:name="com.example.eabl.ExistingUser.passwrdCreationSuccessFragment"
-        android:label="passwrdCreationSuccessFragment" >
+        android:label="passwrdCreationSuccessFragment">
         <action
-            android:id="@+id/action_passwrdCreationSuccessFragment_to_newMemberLoginFragment"
-            app:destination="@id/newMemberLoginFragment" />
+            android:id="@+id/action_passwrdCreationSuccessFragment_to_chooseProfileFragment2"
+            app:destination="@id/chooseProfileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/memberCreateNewPasswordFragment"
-        android:name="com.example.eabl.View.ExistingMember.MemberCreateNewPasswordFragment"
+        android:name="com.example.eabl.ui.view.existingMember.MemberCreateNewPasswordFragment"
         android:label="fragment_create_new_password2"
-        tools:layout="@layout/fragment_create_new_password2" >
+        tools:layout="@layout/fragment_member_create_new_password">
         <action
             android:id="@+id/action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment"
             app:destination="@id/passwrdCreationSuccessFragment" />
     </fragment>
     <fragment
         android:id="@+id/existingMemberFragment"
-        android:name="com.example.eabl.View.ExistingMember.ExistingMemberFragment"
-        android:label="ExistingMemberFragment" >
-        <action
-            android:id="@+id/action_existingMemberFragment_to_memberAccountFoundFragment"
-            app:destination="@id/memberAccountFoundFragment" />
+        android:name="com.example.eabl.ui.view.existingMember.ExistingMemberFragment"
+        android:label="ExistingMemberFragment">
         <action
             android:id="@+id/action_existingMemberFragment_to_lookUpFragment"
             app:destination="@id/lookUpFragment" />
+        <action
+            android:id="@+id/action_existingMemberFragment_to_memberAccountFoundFragment"
+            app:destination="@id/memberAccountFoundFragment" />
     </fragment>
     <fragment
         android:id="@+id/newMemberLoginFragment"
-        android:name="com.example.eabl.View.NewUser.NewMemberLoginFragment"
-        android:label="NewMemberLoginFragment" >
+        android:name="com.example.eabl.ui.view.newUser.NewMemberLoginFragment"
+        android:label="NewMemberLoginFragment">
+        <action
+            android:id="@+id/action_newMemberLoginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_newMemberLoginFragment_to_createYourAccountFragment"
             app:destination="@id/createYourAccountFragment" />
+        <action
+            android:id="@+id/action_newMemberLoginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/deviceVerificationFragment"
-        android:name="com.example.eabl.View.NewUser.DeviceVerificationFragment"
+        android:name="com.example.eabl.ui.view.newUser.DeviceVerificationFragment"
         android:label="fragment_device_verification"
-        tools:layout="@layout/fragment_device_verification" >
+        tools:layout="@layout/fragment_device_verification">
         <action
             android:id="@+id/action_deviceVerificationFragment_to_loginToAccountFragment"
             app:destination="@id/loginToAccountFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/chooseProfileFragment2"
+        android:name="com.example.eabl.ui.view.ChooseProfileFragment"
+        android:label="fragment_choose_profile"
+        tools:layout="@layout/fragment_choose_profile">
+        <action
+            android:id="@+id/action_chooseProfileFragment2_to_newMemberLoginFragment"
+            app:destination="@id/newMemberLoginFragment" />
+        <action
+            android:id="@+id/action_chooseProfileFragment2_to_agentLoginFragment"
+            app:destination="@id/agentLoginFragment" />
+        <action
+            android:id="@+id/action_chooseProfileFragment2_to_newMemberLoginFragment2"
+            app:destination="@id/newMemberLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.eabl.ui.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_shoppingFragment"
+            app:destination="@id/shoppingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_wishListFragment"
+            app:destination="@id/wishListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewWineFragment"
+            app:destination="@id/viewWineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishOrderFragment"
+        android:name="com.example.eabl.ui.view.FinishOrderFragment"
+        android:label="FinishOrderFragment" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.example.eabl.ui.view.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews">
+        <action
+            android:id="@+id/action_reviewsFragment_to_finishOrderFragment"
+            app:destination="@id/finishOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishListFragment"
+        android:name="com.example.eabl.ui.view.WishListFragment"
+        android:label="fragment_wish_list"
+        tools:layout="@layout/fragment_wish_list" />
+    <fragment
+        android:id="@+id/filtersFragment"
+        android:name="com.example.eabl.ui.view.FiltersFragment"
+        android:label="fragment_filters"
+        tools:layout="@layout/fragment_filters">
+        <action
+            android:id="@+id/action_filtersFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingFragment"
+        android:name="com.example.eabl.ui.view.ShoppingFragment"
+        android:label="fragment_shopping"
+        tools:layout="@layout/fragment_shopping">
+        <action
+            android:id="@+id/action_shoppingFragment_to_shopping2Fragment"
+            app:destination="@id/shopping2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopping2Fragment"
+        android:name="com.example.eabl.ui.view.Shopping2Fragment"
+        android:label="fragment_shopping2"
+        tools:layout="@layout/fragment_shopping2">
+        <action
+            android:id="@+id/action_shopping2Fragment_to_filtersFragment"
+            app:destination="@id/filtersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewWineFragment"
+        android:name="com.example.eabl.ui.view.ViewWineFragment"
+        android:label="viewWineFragment" >
+        <action
+            android:id="@+id/action_viewWineFragment_to_productsRecyclerFragment"
+            app:destination="@id/productsRecyclerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectNewFragment2"
+        android:name="com.example.eabl.ui.view.CollectNewFragment"
+        android:label="CollectNewFragment">
+        <action
+            android:id="@+id/action_collectNewFragment2_to_collectNew2Fragment2"
+            app:destination="@id/collectNew2Fragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/collectNew2Fragment2"
+        android:name="com.example.eabl.ui.view.CollectNew2Fragment"
+        android:label="CollectNew2Fragment" />
+    <fragment
+        android:id="@+id/agentLoginFragment"
+        android:name="com.example.eabl.ui.view.newUser.AgentLoginFragment"
+        android:label="AgentLoginFragment">
+        <action
+            android:id="@+id/action_agentLoginFragment_to_collectNewFragment2"
+            app:destination="@id/collectNewFragment2" />
+        <action
+            android:id="@+id/action_agentLoginFragment_to_createYourAccountFragment"
+            app:destination="@id/createYourAccountFragment" />
+        <action
+            android:id="@+id/action_agentLoginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.eabl.ui.view.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_deviceVerificationFragment"
+            app:destination="@id/deviceVerificationFragment" />
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_firstLoginDeviceVerificationFragment"
+            app:destination="@id/firstLoginDeviceVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acLookUpLoginFragment"
+        android:name="com.example.eabl.ui.view.AcLookUpLoginFragment"
+        android:label="fragment_ac_look_up_login"
+        tools:layout="@layout/fragment_ac_look_up_login" >
+        <action
+            android:id="@+id/action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment"
+            app:destination="@id/memberCreateNewPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstLoginDeviceVerificationFragment"
+        android:name="com.example.eabl.ui.view.newUser.FirstLoginDeviceVerificationFragment"
+        android:label="fragment_first_login_device_verification"
+        tools:layout="@layout/fragment_first_login_device_verification" >
+        <action
+            android:id="@+id/action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment"
+            app:destination="@id/acLookUpLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsRecyclerFragment"
+        android:name="com.example.eabl.ProductsRecyclerFragment"
+        android:label="fragment_products_recycler"
+        tools:layout="@layout/fragment_products_recycler" />
 </navigation>

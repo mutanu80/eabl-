@@ -11,9 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.ExistingMember.LoginToAccountFragment"
+        tools:context=".ui.view.existingMember.LoginToAccountFragment"
         android:background="@color/lightGray">
-        <include layout="@layout/fragment_tool_bar"/>
+        />
 
         <TextView
             android:id="@+id/login_to_account"
@@ -34,59 +34,55 @@
 
         <TextView
             android:id="@+id/login_to_account_email"
-            android:layout_width="39dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:text="@string/email_login_to_account"
             android:textColor="@color/black2"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.147"
+            android:layout_marginStart="36dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_to_account" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/email_login"
-            android:layout_width="301dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_to_account_email"
             android:hint="@string/hint_email"
-            android:paddingStart="20dp"
-            android:paddingEnd="180dp"
-            android:layout_marginStart="37dp"
-            android:layout_marginEnd="37dp"
+            android:inputType="textEmailAddress"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
             android:background="@drawable/edittext"/>
 
         <TextView
             android:id="@+id/password"
-            android:layout_width="72dp"
-            android:layout_height="19dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="@string/password_text"
             android:textColor="@color/black2"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:layout_marginStart="37dp"
-            android:layout_marginEnd="266dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@id/email_login"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginStart="37dp"
-            android:layout_marginEnd="37dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
             android:id="@+id/passwordTxt"
-            android:layout_width="301dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
+            android:inputType="textPassword"
             android:background="@drawable/edittext"
             android:hint="@string/hint_login_to_account_password"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
+            android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -104,13 +100,13 @@
             android:textColor="@color/black2"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_goneMarginEnd="36dp"
             app:layout_constraintTop_toBottomOf="@id/passwordTxt"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginButton"
-            android:layout_width="302dp"
+            android:id="@+id/customerLoginButton"
+            android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/button"
@@ -120,42 +116,88 @@
             android:textColor="@color/myWhite"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.495"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/forgot" />
 
         <TextView
             android:id="@+id/loginGuidance"
-            android:layout_width="234dp"
-            android:layout_height="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:layout_marginStart="71dp"
+            android:layout_marginStart="70dp"
             android:layout_marginEnd="70dp"
             android:text="@string/or_continue"
             android:textColor="@color/black2"
             android:textSize="12sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginButton"/>
+            app:layout_constraintTop_toBottomOf="@id/customerLoginButton"/>
 
+<LinearLayout
+    android:id="@+id/linearlayoutSocials"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginTop="15dp"
+    app:layout_constraintTop_toBottomOf="@+id/loginGuidance"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:orientation="horizontal">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/imageButton1"
+        android:paddingTop="10dp"
+        android:layout_marginStart="68dp"
+        android:background="@drawable/apple" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/imageButton2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="40dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/facebook" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/imageButton3"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="67dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/google"/>
+
+</LinearLayout>
         <TextView
             android:id="@+id/loginDirection"
-            android:layout_width="200dp"
-            android:layout_height="18dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:linksClickable="true"
             android:text="@string/no_account"
             android:textColor="@color/black2"
             android:textColorLink="@color/black2"
             android:textSize="12sp"
-            app:layout_constraintHorizontal_bias="0.445"
+            android:layout_marginEnd="74dp"
+            android:layout_marginStart="74dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginGuidance" />
+            app:layout_constraintTop_toBottomOf="@id/linearlayoutSocials" />
 
-
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:visibility="invisible"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
