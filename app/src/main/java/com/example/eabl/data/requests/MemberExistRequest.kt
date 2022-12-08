@@ -3,9 +3,9 @@ package com.example.eabl.data.requests
 
 import com.google.gson.annotations.SerializedName
 
-data class MemberExistRequest(
+data class Request(
     @SerializedName("fullNames")
     val fullNames: String,
-    @SerializedName("ID")
-    val iD: String
+    @SerializedName("nationalID")
+    val nationalID: String
 )

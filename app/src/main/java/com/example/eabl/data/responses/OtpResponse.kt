@@ -3,7 +3,7 @@ package com.example.eabl.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class OtpResponse(
+data class OttpResponse(
     @SerializedName("appUserDetail")
     val appUserDetail: AppUserDetail,
     @SerializedName("statusCode")
@@ -35,7 +35,7 @@ data class OtpResponse(
         @SerializedName("orders")
         val orders: Orders,
         @SerializedName("otpEntity")
-        val otpEntity: OtpEntity,
+        val otpEntity: Any,
         @SerializedName("password")
         val password: String,
         @SerializedName("userRoleEnum")
@@ -57,19 +57,6 @@ data class OtpResponse(
             val orders: String,
             @SerializedName("wishList")
             val wishList: String
-        )
-
-        data class OtpEntity(
-            @SerializedName("confirmedAt")
-            val confirmedAt: String,
-            @SerializedName("createdAt")
-            val createdAt: String,
-            @SerializedName("expiresAt")
-            val expiresAt: String,
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("otp")
-            val otp: String
         )
     }
 }
