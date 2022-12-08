@@ -57,11 +57,7 @@ class DeviceVerificationFragment : Fragment(R.layout.fragment_device_verificatio
             val repo = MemberRepo(apiService)
             val factory = MemberViewModelFactory(repo)
 
-//            binding.deviceVerificationButton.setOnClickListener{
-//              findNavController().navigate(R.id.action_deviceVerificationFragment_to_loginToAccountFragment)
-//            }
-//
-//        }}
+
 
             otpViewModel =
                 ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
@@ -94,6 +90,7 @@ class DeviceVerificationFragment : Fragment(R.layout.fragment_device_verificatio
                 val email = eablSharedPreferences.getEmail()
 
                 if (isValidData()) {
+                    Log.e("device","${email}")
                     binding.progressBar1.visibility = View.VISIBLE
                         otpViewModel.otp(email = email, otp = otp1)
                 }
@@ -103,13 +100,13 @@ class DeviceVerificationFragment : Fragment(R.layout.fragment_device_verificatio
 
             val otp1 = binding.linearLayoutOtp.text.toString()
             val email = eablSharedPreferences.getEmail()
-
-        if (otp1.isEmpty()) {
-            toast("fill all the fields")
+        Log.e("device","${email}")
+        if (email.isEmpty()) {
+            toast("No Email")
             return false
         }
         if (otp1.length < 6) {
-            toast("fill all the fields")
+            toast("Otp does not meet the required length")
             return false
         }
         if(otp1.length>8){

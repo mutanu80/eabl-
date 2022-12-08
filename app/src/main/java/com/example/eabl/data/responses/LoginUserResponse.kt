@@ -3,7 +3,7 @@ package com.example.eabl.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class Login(
+data class LoginUserResponse(
     @SerializedName("statusCode")
     val statusCode: Int,
     @SerializedName("statusMsg")

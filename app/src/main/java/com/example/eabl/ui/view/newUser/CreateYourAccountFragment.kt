@@ -16,6 +16,7 @@ import com.example.eabl.data.remote.States
 import com.example.eabl.util.toast
 import com.example.eabl.ui.viewModel.MemberViewModelFactory
 import com.example.eabl.data.repository.MemberRepo
+import com.example.eabl.util.EablSharedPreferences
 
 
 class CreateYourAccountFragment : Fragment() {
@@ -50,6 +51,7 @@ class CreateYourAccountFragment : Fragment() {
                          is States.Success -> {
                              binding.progressBar1.visibility=View.INVISIBLE
                              if(it.data?.statusCode==1){
+
                                  toast("${it.data.statusMsg}")
                                  findNavController().navigate(R.id.action_createYourAccountFragment_to_deviceVerificationFragment)
                              }else{
@@ -89,6 +91,7 @@ class CreateYourAccountFragment : Fragment() {
             binding.idNumberTxt.requestFocus()
 
         } else {
+            EablSharedPreferences(requireContext()).saveEmail(email)
             registerViewModel.registerUser(fullNames=fullNames,email=email, ID=ID)
 
 

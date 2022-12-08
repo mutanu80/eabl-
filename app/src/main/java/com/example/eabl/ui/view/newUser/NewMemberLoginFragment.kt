@@ -56,56 +56,52 @@ class NewMemberLoginFragment : Fragment() {
         val repo = MemberRepo(apiService)
         val factory = MemberViewModelFactory(repo)
 
+
+
+
+                        loginViewModel=ViewModelProvider(this,factory).get(RegisterViewModel::class.java)
+
+                        lifecycleScope.launchWhenResumed {
+                            loginViewModel._loginStateFlow.collect(){
+                                when (it) {
+                                    is States.Error -> { _binding.progressBar1.visibility=View.INVISIBLE
+                        toast("${it.throwable?.message.toString()}")
+                    }
+                    is States.Success -> {
+                        _binding.progressBar1.visibility=View.INVISIBLE
+                        val userId = it.data
+                        it.data.let{}
+                        if (it.data?.statusCode==1) {
+                                toast("${it.data.statusMsg}")
+                            findNavController().navigate(R.id.action_newMemberLoginFragment_to_homeFragment)
+                        } else {
+                            toast("${it.data?.statusMsg}")
+
+                        }
+                    }
+                    null->{}
+                }
+            }
+            }
+
         _binding.customerLoginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_newMemberLoginFragment_to_homeFragment)
+            _binding.progressBar1.visibility=View.VISIBLE
+
+            val email = _binding.emailLogin.text.toString()
+            val password = _binding.passwordTxt.text.toString()
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                _binding.emailLogin.error = "Email Required"
+                _binding.emailLogin.requestFocus()
+            } else if(password.isEmpty()) {
+                _binding.passwordTxt.error = "Password Required"
+                _binding.passwordTxt.requestFocus()
+            }
+             else
+
+             loginViewModel.signInMember(email = email, password = password)
+            }
+
         }
-    }}
+    }
 
-
-//                        loginViewModel=ViewModelProvider(this,factory).get(RegisterViewModel::class.java)
-//
-//                        lifecycleScope.launchWhenResumed {
-//                            loginViewModel._loginStateFlow.collect(){
-//                                when (it) {
-//
-//                                    is States.Error -> { _binding.progressBar1.visibility=View.INVISIBLE
-//                        toast("${it.throwable?.message.toString()}")
-//                    }
-//                    is States.Success -> {
-//                        _binding.progressBar1.visibility=View.INVISIBLE
-//                        val userId = it.data
-//                        it.data.let{}
-//                        if (it.data?.statusCode==1) {
-//                                toast("${it.data.statusMsg}")
-//                            findNavController().navigate(R.id.action_newMemberLoginFragment_to_homeFragment)
-//                        } else {
-//                            toast("${it.data?.statusMsg}")
-//                            findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
-//                        }
-//                    }
-//                    null->{}
-//                }
-//            }
-//            }
-//
-//        _binding.customerLoginButton.setOnClickListener {
-//            _binding.progressBar1.visibility=View.VISIBLE
-//
-//            val email = _binding.emailLogin.text.toString()
-//            val password = _binding.passwordTxt.text.toString()
-//
-//            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                _binding.emailLogin.error = "Email Required"
-//                _binding.emailLogin.requestFocus()
-//            } else if(password.isEmpty()) {
-//                _binding.passwordTxt.error = "Password Required"
-//                _binding.passwordTxt.requestFocus()
-//            }
-//             else
-//                findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
-//             //{loginViewModel.signInMember(email = email, password = password)
-//            }
-//
-//        }
-//    }
-//

@@ -3,7 +3,7 @@ package com.example.eabl.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class Member(
+data class MemberExistResponse(
     @SerializedName("appUserDetail")
     val appUserDetail: AppUserDetail,
     @SerializedName("statusCode")

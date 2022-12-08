@@ -34,7 +34,7 @@ class MemberAccountFoundFragment : Fragment(R.layout.fragment_member_account_fou
         binding.accountSuccessContinueButton.setOnClickListener {
             binding.progressBar1.visibility=View.VISIBLE
             it.findNavController()
-                .navigate(R.id.action_memberAccountFoundFragment_to_firstLoginDeviceVerificationFragment)
+                .navigate(R.id.action_memberAccountFoundFragment_to_deviceVerificationFragment)
 
         }
 

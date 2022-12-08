@@ -5,55 +5,91 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.eabl.data.remote.ApiService
+import com.example.eabl.data.remote.States
+import com.example.eabl.data.repository.MemberRepo
+import com.example.eabl.data.responses.ProductsResponse
+import com.example.eabl.databinding.FragmentProductsRecyclerBinding
+import com.example.eabl.databinding.FragmentShoppingRecycleviewBinding
+import com.example.eabl.ui.adapters.ProductsAdapter
+import com.example.eabl.ui.adapters.ShoppingAdapter
+import com.example.eabl.ui.viewModel.MemberViewModelFactory
+import com.example.eabl.ui.viewModel.RegisterViewModel
+import com.example.eabl.util.toast
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [shoppingRecycleviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class shoppingRecycleviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val shoppingAdapter by lazy { ShoppingAdapter() }
+    private lateinit var shoppingViewModel: RegisterViewModel
+    private lateinit var binding: FragmentShoppingRecycleviewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding =FragmentShoppingRecycleviewBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_recycleview, container, false)
+        return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment shoppingRecycleviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            shoppingRecycleviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val apiService = ApiService()
+        val repo = MemberRepo(apiService)
+        val factory = MemberViewModelFactory(repo)
+        shoppingViewModel =
+            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+        shoppingViewModel.viewAllProducts()
+        lifecycleScope.launch {
+            shoppingViewModel?._getProductsStateFlow?.collect {
+                when (it) {
+                    is States.Success -> {
+                        // binding.progressBar1.visibility=View.INVISIBLE
+                        if(it.data?.statusCode==1){
+                            inflateRecyclerView(it.data!!.products)
+                            toast("${it.data.statusMsg}")
+                        }else{
+                            toast("${it.data?.statusMsg}")
+                        }
+
+                    }
+                    is States.Error -> {
+                        // binding.progressBar1.visibility=View.INVISIBLE
+                        toast("${it.throwable?.message.toString()}")
+                    }
+                    null->{}
                 }
             }
+        }
+
+
     }
+
+    private fun inflateRecyclerView(products: List<ProductsResponse.Product>) {
+        if (products.isEmpty()) {
+            binding.tvErrorResponse.visibility = View.VISIBLE
+            binding.shoppingRecyclerView.visibility = View.GONE
+        } else {
+            binding.tvErrorResponse.visibility = View.GONE
+            binding.shoppingRecyclerView.visibility = View.VISIBLE
+            shoppingAdapter.submitList(products)
+            shoppingAdapter?.notifyDataSetChanged()
+
+            binding.shoppingRecyclerView.apply {
+                layoutManager = GridLayoutManager(this.context!!,1)
+                adapter = shoppingAdapter
+                setHasFixedSize(true)
+            }
+        }
+    }
+
+
 }
+
+
+

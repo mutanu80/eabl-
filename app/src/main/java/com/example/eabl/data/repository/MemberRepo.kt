@@ -29,7 +29,9 @@ class MemberRepo(private val apiServe: ApiService): SafeApiCall() {
     suspend fun getProduct()=safeApiCall {
         apiServe.getSingleProduct()
     }
-
+    suspend fun getShoppingProducts()=safeApiCall {
+        apiServe.getShoppingProducts()
+    }
 //    suspend fun  mockApi()=apiRequestByResourceStateFlow {
 //        apiServe.mockApi()
 //    }

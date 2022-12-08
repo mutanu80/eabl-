@@ -18,6 +18,7 @@ import com.example.eabl.data.repository.MemberRepo
 import com.example.eabl.databinding.FragmentExistingMemberBinding
 import com.example.eabl.ui.viewModel.MemberViewModelFactory
 import com.example.eabl.ui.viewModel.RegisterViewModel
+import com.example.eabl.util.EablSharedPreferences
 import com.example.eabl.util.MEMBER_FULL_NAME
 import com.example.eabl.util.MEMBER_ID_NUMBER
 import com.example.eabl.util.toast
@@ -57,11 +58,11 @@ class ExistingMemberFragment : Fragment(R.layout.fragment_existing_member) {
                     is States.Success -> {
                         _binding.progressBar1.visibility=View.INVISIBLE
                         if(it.data?.statusCode==1){
+                            EablSharedPreferences(requireContext()).saveEmail(it.data!!.appUserDetail.email.toString())
                             toast("${it.data.statusMsg}")
                             findNavController().navigate(R.id.action_existingMemberFragment_to_memberAccountFoundFragment)
                         }else{
                             toast("${it.data?.statusMsg}")
-                            findNavController().navigate(R.id.action_existingMemberFragment_to_memberAccountFoundFragment)
                         }
 
                     }
@@ -75,27 +76,28 @@ class ExistingMemberFragment : Fragment(R.layout.fragment_existing_member) {
         }
 
         _binding.submitButton.setOnClickListener {
-findNavController().navigate(R.id.action_existingMemberFragment_to_memberAccountFoundFragment)
+
             val fullNames = _binding.fullNameTxt.text.toString()
-            val ID = _binding.idTxt.text.toString()
+            val nationalID = _binding.idTxt.text.toString()
+
 
             if (fullNames.isEmpty()) {
                 _binding.fullNameTxt.error = " Name Required"
                 _binding.fullNameTxt.requestFocus()
-            } else if (ID.isEmpty()) {
+            } else if (nationalID.isEmpty()) {
                 _binding.idTxt.error = "Id Number Required"
                 _binding.idTxt.requestFocus()
             }
-            else if(ID.length<7 || ID.length>8)
+            else if(nationalID.length<7 || nationalID.length>8)
             {
                 toast("input correct id")
                 _binding.idTxt.requestFocus()
             } else {
                 MEMBER_FULL_NAME=fullNames
-                MEMBER_ID_NUMBER =ID
 
                 _binding.progressBar1.visibility=View.VISIBLE
-               checkingMemberViewModel.checkMemberAccount(fullNames = fullNames, ID = ID)
+
+               checkingMemberViewModel.checkMemberAccount(fullNames = fullNames, nationalID = nationalID)
             }
 
         }

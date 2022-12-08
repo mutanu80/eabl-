@@ -28,7 +28,7 @@ class Splash2 : Fragment() {
                 findNavController().navigate(R.id.action_splash2_to_viewPagerFragment)
 
             }else {
-                findNavController().navigate(R.id.action_splash2_to_lookUpFragment)
+                findNavController().navigate(R.id.action_splash2_to_chooseProfileFragment2)
             }
         }, 3000)
         // Inflate the layout for this fragment

@@ -24,6 +24,9 @@
             app:destination="@id/lookUpFragment"
             app:popUpTo="@id/splash2"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash2_to_chooseProfileFragment2"
+            app:destination="@id/chooseProfileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
@@ -72,6 +75,9 @@
         <action
             android:id="@+id/action_memberAccountFoundFragment_to_firstLoginDeviceVerificationFragment"
             app:destination="@id/firstLoginDeviceVerificationFragment" />
+        <action
+            android:id="@+id/action_memberAccountFoundFragment_to_deviceVerificationFragment"
+            app:destination="@id/deviceVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwrdCreationSuccessFragment"
@@ -206,6 +212,9 @@
         <action
             android:id="@+id/action_viewWineFragment_to_productsRecyclerFragment"
             app:destination="@id/productsRecyclerFragment" />
+        <action
+            android:id="@+id/action_viewWineFragment_to_shoppingRecycleviewFragment"
+            app:destination="@id/shoppingRecycleviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectNewFragment2"
@@ -268,4 +277,12 @@
         android:name="com.example.eabl.ProductsRecyclerFragment"
         android:label="fragment_products_recycler"
         tools:layout="@layout/fragment_products_recycler" />
+    <fragment
+        android:id="@+id/shoppingRecycleviewFragment"
+        android:name="com.example.eabl.shoppingRecycleviewFragment"
+        android:label="shoppingRecycleviewFragment" >
+        <action
+            android:id="@+id/action_shoppingRecycleviewFragment_to_shopping2Fragment"
+            app:destination="@id/shopping2Fragment" />
+    </fragment>
 </navigation>
