@@ -1,7 +1,9 @@
 package com.example.eabl.data.responses
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ProductsResponse(
     @SerializedName("products")
@@ -11,6 +13,7 @@ data class ProductsResponse(
     @SerializedName("statusMsg")
     val statusMsg: String
 ) {
+    @Parcelize
     data class Product(
         @SerializedName("description")
         val description: String,
@@ -27,6 +30,6 @@ data class ProductsResponse(
         @SerializedName("rating")
         val rating: Int,
         @SerializedName("reviews")
-        val reviews: List<Any>
-    )
+        val reviews: List<String>?=null
+    ) : Parcelable
 }

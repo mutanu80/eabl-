@@ -7,5 +7,5 @@ data class AddToCartRequest(
     @SerializedName("nationalID")
     val nationalID: String,
     @SerializedName("productId")
-    val productId: String
+    val productId:String
 )

@@ -52,91 +52,93 @@ class MemberCreateNewPasswordFragment : Fragment(R.layout.fragment_member_create
         val apiService = ApiService.invoke()
         val repo = MemberRepo(apiService)
         val factory = MemberViewModelFactory(repo)
-        binding.createPasswordContinueButton.setOnClickListener{
-            findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
+
+
+
+
+        setPasswordViewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+
+        lifecycleScope.launchWhenResumed {
+            setPasswordViewModel?._setPasswordStateFlow?.collect {
+                when (it) {
+                    is States.Success -> {
+                    binding.progressBar1.visibility=View.GONE
+                    if (it.data?.statusCode == 1) {
+
+                        toast("${it.data.statusMsg}")
+                        findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
+                    } else {
+                       // toast("${it.data?.statusMsg}")
+                        findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
+
+                    }}
+                is States.Error -> {
+
+
+                binding.progressBar1.visibility = View.GONE
+                //toast("${it.throwable?.message.toString()}")
+                    findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
+            }
+                null->{}
+            }
         }
+    }
+
+        binding.createPasswordContinueButton.setOnClickListener {
 
 
+            val pin = binding.newPasswordTxt.text.toString()
+            val confirmPin = binding.repeatPasswordTxt.text.toString()
+            val email = eablSharedPreferences.getEmail()
+            if (isValidFields()) {
+                binding.progressBar1.visibility=View.VISIBLE
+                setPasswordViewModel.setUserPassword(email=email, password=pin)
+            }
 
-//        setPasswordViewModel = ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
-//
-//        lifecycleScope.launchWhenResumed {
-//            setPasswordViewModel?._registerStateFlow?.collect {
-//                when (it) {
-//                    is States.Success -> {
-//                    binding.progressBar1.visibility=View.GONE
-//                    if (it.data?.statusCode == 1) {
-//                        toast("${it.data.statusMsg}")
-//                        findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
-//                    } else {
-//                        toast("${it.data?.statusMsg}")
-//                        findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
-//                    }}
-//                is States.Error -> {
-//                binding.progressBar1.visibility = View.GONE
-//                toast("${it.throwable?.message.toString()}")
-//                    findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
-//            }
-//                null->{}
-//            }
-//        }
-//    }
-//
-//        binding.createPasswordContinueButton.setOnClickListener {
-//
-//
-//            val pin = binding.newPasswordTxt.text.toString()
-//            val confirmPin = binding.repeatPasswordTxt.text.toString()
-//            val email = eablSharedPreferences.getEmail()
-//            if (isValidFields()) {
-//                binding.progressBar1.visibility=View.VISIBLE
-//                setPasswordViewModel.setUserPassword(email=email, password=pin)
-//            }
-//
-//
-//    }}
-//        private fun isValidFields(): Boolean {
-//            val pin = binding.newPasswordTxt.text.toString()
-//            val confirmPin = binding.repeatPasswordTxt.text.toString()
-//            val email = eablSharedPreferences.getEmail()
-//            if (email!!.isEmpty()) {
-//                toast("Email not found")
-//            return false
-//            }
-//            if (pin.isEmpty()) {
-//                binding.newPasswordTxt.error ="pin is empty"
-//                return false
-//            }
-//            if (!pin.trim().contentEquals(confirmPin.trim())) {
-//                toast("pin does not match")
-//                return false
-//            }
-//            if (pin.length <8) {
-//                toast("A minimum of eight characters required")
-//                return false
-//            }
-//            if(!pin.matches(".*[A-Z].*".toRegex()))
-//            {
-//                toast("Must contain 1 Upper-case Character")
-//                return false
-//            }
-//            if (!pin.matches(".*[0-9].*".toRegex()))
-//            {
-//                toast("password must contain atleast 1 number")
-//                return false
-//            }
-//            if(!pin.matches(".*[a-z].*".toRegex()))
-//            {
-//                toast("Must contain 1 Lower-case Character")
-//                return false
-//            }
-//            if(!pin.matches(".*[!@#$%^&=+-_].*".toRegex()))
-//            {
-//                toast("Must contain a special Character")
-//                return false
-//
-//            }
-//
-//            return true
-//
+
+    }}
+        private fun isValidFields(): Boolean {
+            val pin = binding.newPasswordTxt.text.toString()
+            val confirmPin = binding.repeatPasswordTxt.text.toString()
+            val email = eablSharedPreferences.getEmail()
+            if (email!!.isEmpty()) {
+                toast("Email not found")
+            return false
+            }
+            if (pin.isEmpty()) {
+                binding.newPasswordTxt.error ="pin is empty"
+                return false
+            }
+            if (!pin.trim().contentEquals(confirmPin.trim())) {
+                toast("pin does not match")
+                return false
+            }
+            if (pin.length <8) {
+                toast("A minimum of eight characters required")
+                return false
+            }
+            if(!pin.matches(".*[A-Z].*".toRegex()))
+            {
+                toast("Must contain 1 Upper-case Character")
+                return false
+            }
+            if (!pin.matches(".*[0-9].*".toRegex()))
+            {
+                toast("password must contain atleast 1 number")
+                return false
+            }
+            if(!pin.matches(".*[a-z].*".toRegex()))
+            {
+                toast("Must contain 1 Lower-case Character")
+                return false
+            }
+            if(!pin.matches(".*[!@#$%^&=+-_].*".toRegex()))
+            {
+                toast("Must contain a special Character")
+                return false
+
+            }
+
+            return true
+
     }}

@@ -37,6 +37,9 @@ interface ApiService {
     @GET("/products/allproducts")
     suspend fun getAllProducts():ProductsResponse
 
+    @GET("/products/allproducts")
+    suspend fun getShoppingProducts():ProductsResponse
+
     @GET("products/product/{id}/")
     suspend fun getSingleProduct():SingleProductResponse
 

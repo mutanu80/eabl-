@@ -31,9 +31,9 @@ data class SetPasswordResponse(
         @SerializedName("locked")
         val locked: Boolean,
         @SerializedName("nationalID")
-        val nationalID: Any,
+        val nationalID: String,
         @SerializedName("orders")
-        val orders: List<Any>,
+        val orders: Orders,
         @SerializedName("otpEntity")
         val otpEntity: OtpEntity,
         @SerializedName("password")
@@ -46,6 +46,17 @@ data class SetPasswordResponse(
         data class Authority(
             @SerializedName("authority")
             val authority: String
+        )
+
+        data class Orders(
+            @SerializedName("nationalID")
+            val nationalID: String,
+            @SerializedName("orderId")
+            val orderId: String,
+            @SerializedName("orders")
+            val orders: String,
+            @SerializedName("wishList")
+            val wishList: String
         )
 
         data class OtpEntity(

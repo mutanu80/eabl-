@@ -76,6 +76,11 @@ class RegisterViewModel() : ViewModel() {
     val _getProductsStateFlow: StateFlow<States<ProductsResponse>?>
         get() = getProductsStateFlow
 
+    private val getShoppingStateFlow: MutableStateFlow<States<ProductsResponse>?> =
+        MutableStateFlow<States<ProductsResponse>?>(null)
+    val _getShoppingStateFlow: StateFlow<States<ProductsResponse>?>
+        get() = getShoppingStateFlow
+
 
 
 //    private val _mockStateFlow: MutableStateFlow<States<MockApiResponse>?> =
@@ -98,9 +103,9 @@ class RegisterViewModel() : ViewModel() {
             repo.signInMember(loginUserRequest = LoginUserRequest(email, password))
     }
 
-    fun checkMemberAccount(fullNames: String, ID: String) = viewModelScope.launch {
+    fun checkMemberAccount(fullNames: String, nationalID: String) = viewModelScope.launch {
         checkStateFlow.value =
-            repo.checkMember(memberExistRequest = MemberExistRequest(fullNames, ID))
+            repo.checkMember(memberExistRequest = MemberExistRequest(fullNames, nationalID))
     }
 
     fun resetPassword(email: String) = viewModelScope.launch {
@@ -120,6 +125,10 @@ class RegisterViewModel() : ViewModel() {
     fun viewOneProduct()=viewModelScope.launch{
         singleProductsStateFlow.value=repo.getProduct()
     }
+
+fun getShoppingProducts()=viewModelScope.launch {
+    getShoppingStateFlow.value=repo.getShoppingProducts()
+}
 //    fun addItemToCart()=viewModelScope.launch{
 //        addCartStateFlow.value=repo.addProductsToCart()
 //    }

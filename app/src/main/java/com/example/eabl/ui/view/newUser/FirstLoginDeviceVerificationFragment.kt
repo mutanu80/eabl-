@@ -46,131 +46,132 @@ class FirstLoginDeviceVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.deviceVerificationButton.setOnClickListener {
-            findNavController().navigate(R.id.action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment)
-        }
-    }}
 
-//        lifecycleScope.launchWhenCreated {
-//            setExpiryCountDownTimer()
-//            delay(100)
-//            countDownTimer.start()
-//        }
-//
-//        eablSharedPreferences = EablSharedPreferences(requireContext())
-//        val apiService = ApiService()
-//        val repo = MemberRepo(apiService)
-//        val factory = MemberViewModelFactory(repo)
-//
-//        otpViewModel =
-//            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
-//
-//        lifecycleScope.launchWhenResumed {
-//            otpViewModel._otpStateFlow.collect() {
-//                when (it) {
-//                    is States.Success -> {
-//                        binding.progressBar1.visibility=View.INVISIBLE
-//                        if(it.data?.statusCode==1){
-//                            toast("${it.data.statusMsg}")
-//                            findNavController().navigate(R.id.action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment)
-//                        }else{
-//                            toast("${it.data?.statusMsg}")
-//                        }
-//
-//                    }
-//                    is States.Error -> {
-//                        binding.progressBar1.visibility=View.INVISIBLE
-//                        toast("${it.throwable?.message.toString()}")
-//                    }
-//                    null->{}
-//                }
-//            }
-//        }
-//
-//
-//        binding.deviceVerificationButton.setOnClickListener {
-//            val otp1 = binding.linearLayoutOtp.text.toString()
-//            val email = eablSharedPreferences.getEmail()
-//
-//            if (isValidData()) {
-//                binding.progressBar1.visibility = View.VISIBLE
-//
-//
-//                otpViewModel.otp(email = email, otp = otp1)
-//
-//            }
-//        }}
-//
-//    private fun isValidData(): Boolean {
-//
-//        val otp1 = binding.linearLayoutOtp.text.toString()
-//        val email = eablSharedPreferences.getEmail()
-//
-//        if (otp1.isEmpty()) {
-//            toast("fill all the fields")
-//            return false
-//        }
-//        if (otp1.length < 6) {
-//            toast("fill all the fields")
-//            return false
-//        }
-//        else {
-//            return true
-//
-//
-//        }
-//    }
-//
-//
-//
-//    private fun setExpiryCountDownTimer() {
-//        if (::countDownTimer.isInitialized) {
-//            countDownTimer.cancel()
-//        }
-//        countDownTimer = object : CountDownTimer(81000, 1000) {
-//
-//            override fun onTick(millisUntilFinished: Long) {
-//
-//                val secondsDownTimer = "" + millisUntilFinished / 1000 + "s"
-//                Log.e("VERIFICATION","VERY ${secondsDownTimer}")
-////                _binding.codeExpire.text = getString(
-////                    R.string.did_not_get_code_resend_in_20_second,
-////                    secondsDownTimer.toString()
-////                )
-//                binding.codeExpire.text = secondsDownTimer.toString()
-//            }
-//
-//            override fun onFinish() {
-//                binding.codeExpire.text =
-//                    resources.getText(R.string.resend_code)
-//                binding.codeExpire.setOnClickListener {
-//                    initiateRequestOtp()
-//
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun initiateRequestOtp() {
-//        otpViewModel.checkMemberAccount(MEMBER_FULL_NAME, MEMBER_ID_NUMBER)
-//        countDownTimer.start()
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        countDownTimer.cancel()
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//
-//        countDownTimer.cancel()
-//    }
-//}
-//
-//
-//
-//
-//
-//
-//
-//
+
+        lifecycleScope.launchWhenCreated {
+            setExpiryCountDownTimer()
+            delay(100)
+            countDownTimer.start()
+        }
+
+        eablSharedPreferences = EablSharedPreferences(requireContext())
+        val apiService = ApiService()
+        val repo = MemberRepo(apiService)
+        val factory = MemberViewModelFactory(repo)
+
+        otpViewModel =
+            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+
+        lifecycleScope.launchWhenResumed {
+            otpViewModel._otpStateFlow.collect() {
+                when (it) {
+                    is States.Success -> {
+                        binding.progressBar1.visibility=View.INVISIBLE
+                        if(it.data?.statusCode==1){
+                            toast("${it.data.statusMsg}")
+                            findNavController().navigate(R.id.action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment)
+                        }else{
+                           // toast("${it.data?.statusMsg}")
+                            findNavController().navigate(R.id.action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment)
+                        }
+
+                    }
+                    is States.Error -> {
+                        binding.progressBar1.visibility=View.INVISIBLE
+                      //  toast("${it.throwable?.message.toString()}")
+                        findNavController().navigate(R.id.action_firstLoginDeviceVerificationFragment_to_acLookUpLoginFragment)
+                    }
+                    null->{}
+                }
+            }
+        }
+
+
+        binding.deviceVerificationButton.setOnClickListener {
+            val otp1 = binding.linearLayoutOtp.text.toString()
+            val email = eablSharedPreferences.getEmail()
+
+            if (isValidData()) {
+                binding.progressBar1.visibility = View.VISIBLE
+
+
+                otpViewModel.otp(email = email, otp = otp1)
+
+            }
+        }}
+
+    private fun isValidData(): Boolean {
+
+        val otp1 = binding.linearLayoutOtp.text.toString()
+        val email = eablSharedPreferences.getEmail()
+
+        if (email.isEmpty()) {
+            toast("No Email")
+            return false
+        }
+        if (otp1.length < 6) {
+            toast("Otp does not meet the required length")
+            return false
+        }
+        if(otp1.length>8){
+            toast("unrecognized code")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+
+
+
+    private fun setExpiryCountDownTimer() {
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
+        }
+        countDownTimer = object : CountDownTimer(81000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+
+                val secondsDownTimer = "" + millisUntilFinished / 1000 + "s"
+                Log.e("VERIFICATION","VERY ${secondsDownTimer}")
+//                _binding.codeExpire.text = getString(
+//                    R.string.did_not_get_code_resend_in_20_second,
+//                    secondsDownTimer.toString()
+//                )
+                binding.codeExpire.text = secondsDownTimer.toString()
+            }
+
+            override fun onFinish() {
+                binding.codeExpire.text =
+                    resources.getText(R.string.resend_code)
+                binding.codeExpire.setOnClickListener {
+                    initiateRequestOtp()
+
+                }
+            }
+        }
+    }
+
+    private fun initiateRequestOtp() {
+        otpViewModel.checkMemberAccount(MEMBER_FULL_NAME, MEMBER_ID_NUMBER)
+        countDownTimer.start()
+    }
+    override fun onPause() {
+        super.onPause()
+        countDownTimer.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        countDownTimer.cancel()
+    }
+}
+
+
+
+
+
+
+
+

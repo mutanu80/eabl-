@@ -46,60 +46,57 @@ class AcLookUpLoginFragment : Fragment() {
         val apiService = ApiService()
         val repo = MemberRepo(apiService)
         val factory = MemberViewModelFactory(repo)
-        binding.loginButton.setOnClickListener{
-            findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
+
+        loginViewModel =
+            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+
+        lifecycleScope.launch {
+            loginViewModel._loginStateFlow.collect() {
+                when (it) {
+
+                    is States.Success -> {
+                        binding.progressBar1.visibility = View.GONE
+                        if (it.data?.statusCode == 1) {
+                            toast("${it.data.statusMsg}")
+                            findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
+                        } else {
+                           // toast("${it.data?.statusMsg}")
+                            findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
+                        }
+
+                    }
+                    is States.Error -> {
+                        binding.progressBar1.visibility=View.GONE
+                       // toast("${it.throwable?.message.toString()}")
+                        findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
+                    }
+                    null -> {}
+                }
+            }
+
         }
+        binding.loginButton.setOnClickListener {
+            val email = EablSharedPreferences(requireContext()).getEmail()
+            val password = binding.edPassword.text.toString()
 
-    }}
+            if (password.isEmpty()) {
+                toast("password Required")
+            }
+            else {
+                binding.progressBar1.visibility=View.VISIBLE
+                loginViewModel.signInMember(email = email, password= password)
+            }
 
-//        loginViewModel =
-//            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
-//
-//        lifecycleScope.launch {
-//            loginViewModel._loginStateFlow.collect() {
-//                when (it) {
-//
-//                    is States.Success -> {
-//                        binding.progressBar1.visibility = View.GONE
-//                        if (it.data?.statusCode == 1) {
-//                            toast("${it.data.statusMsg}")
-//                            findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
-//                        } else {
-//                            toast("${it.data?.statusMsg}")
-//                        }
-//
-//                    }
-//                    is States.Error -> {
-//                        binding.progressBar1.visibility=View.GONE
-//                        toast("${it.throwable?.message.toString()}")
-//                    }
-//                    null -> {}
-//                }
-//            }
-//
-//        }
-//        binding.loginButton.setOnClickListener {
-//            val email = EablSharedPreferences(requireContext()).getEmail()
-//            val password = binding.edPassword.text.toString()
-//
-//            if (password.isEmpty()) {
-//                toast("password Required")
-//            }
-//            else {
-//                binding.progressBar1.visibility=View.VISIBLE
-//                loginViewModel.signInMember(email = email, password= password)
-//            }
-//
-//        }
-//    }
-//}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+

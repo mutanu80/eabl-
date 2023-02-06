@@ -52,53 +52,56 @@ class LoginToAccountFragment : Fragment(R.layout.fragment_login_to_account) {
         val repo = MemberRepo(apiService)
         val factory = MemberViewModelFactory(repo)
 
-        _binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
-        }
-    }}
 
-//        loginViewModel =
-//            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
-//
-//        lifecycleScope.launch {
-//            loginViewModel._loginStateFlow.collect() {
-//                when (it) {
-//                    is States.Success -> {
-//                       _binding.progressBar1.visibility=View.GONE
-//                        if (it.data?.statusCode==1) {
-//                            toast("${it.data.statusMsg}")
-//                            findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
-//                        } else {
-//                            toast("${it.data?.statusMsg}")
-//
-//                        }
-//
-//                    }
-//                    is States.Error -> {
-//                         _binding.progressBar1.visibility=View.GONE
-//                        toast("${it.throwable?.localizedMessage}")
-//                        findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
-//                    }
-//                    null -> {}
-//                }
-//            }
-//
-//        }
-//        _binding.loginButton.setOnClickListener {
-//            val email = EablSharedPreferences(requireContext()).getEmail()
-//            val password = _binding.edPassword.text.toString()
-//
-//            if (password.isEmpty()) {
-//                toast("password Required")
-//            }
-//            else {
-//                _binding.progressBar1.visibility=View.VISIBLE
-//               loginViewModel.signInMember(email = email, password= password)
-//            }
-//
-//        }
-//    }
-//}
+
+        loginViewModel =
+            ViewModelProvider(this, factory).get(RegisterViewModel::class.java)
+
+        lifecycleScope.launch {
+            loginViewModel._loginStateFlow.collect() {
+                when (it) {
+                    is States.Success -> {
+                       _binding.progressBar1.visibility=View.GONE
+                        if (it.data?.statusCode==1) {
+                            Log.e("DEVICE","LOGIN ${it.data.toString()}")
+                            toast("${it.data.statusMsg}")
+                            findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
+                        } else {
+                          //  toast("${it.data?.statusMsg}")
+                           // Log.e("DEVICE","LOGIN ${it.data.toString()}")
+                            findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
+
+                        }
+
+                    }
+                    is States.Error -> {
+                         _binding.progressBar1.visibility=View.GONE
+                        //toast("${it.throwable?.localizedMessage}")
+                        findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
+                    }
+                    null -> {}
+                }
+            }
+
+        }
+        _binding.loginButton.setOnClickListener {
+            val email = _binding.emailLogin.text.toString()
+            val password = _binding.edPassword.text.toString()
+
+            if (password.isEmpty()) {
+                toast("password Required")
+            }
+                if (email.isEmpty()) {
+                    toast("email Required")
+                } else {
+                    EablSharedPreferences(requireContext()).saveEmail(email)
+                    _binding.progressBar1.visibility = View.VISIBLE
+                    loginViewModel.signInMember(email = email, password = password)
+                }
+
+            }
+        }
+    }
 
 
 
