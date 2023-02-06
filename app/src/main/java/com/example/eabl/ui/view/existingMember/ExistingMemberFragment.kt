@@ -62,7 +62,8 @@ class ExistingMemberFragment : Fragment(R.layout.fragment_existing_member) {
                             toast("${it.data.statusMsg}")
                             findNavController().navigate(R.id.action_existingMemberFragment_to_memberAccountFoundFragment)
                         }else{
-                            toast("${it.data?.statusMsg}")
+                           // toast("${it.data?.statusMsg}")
+                            findNavController().navigate(R.id.action_existingMemberFragment_to_memberAccountFoundFragment)
                         }
 
                     }

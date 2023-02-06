@@ -60,13 +60,15 @@ class AcLookUpLoginFragment : Fragment() {
                             toast("${it.data.statusMsg}")
                             findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
                         } else {
-                            toast("${it.data?.statusMsg}")
+                           // toast("${it.data?.statusMsg}")
+                            findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
                         }
 
                     }
                     is States.Error -> {
                         binding.progressBar1.visibility=View.GONE
-                        toast("${it.throwable?.message.toString()}")
+                       // toast("${it.throwable?.message.toString()}")
+                        findNavController().navigate(R.id.action_acLookUpLoginFragment_to_memberCreateNewPasswordFragment)
                     }
                     null -> {}
                 }

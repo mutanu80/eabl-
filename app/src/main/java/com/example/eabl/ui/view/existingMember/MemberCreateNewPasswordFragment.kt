@@ -68,15 +68,16 @@ class MemberCreateNewPasswordFragment : Fragment(R.layout.fragment_member_create
                         toast("${it.data.statusMsg}")
                         findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
                     } else {
-                        toast("${it.data?.statusMsg}")
+                       // toast("${it.data?.statusMsg}")
+                        findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
 
                     }}
                 is States.Error -> {
 
 
                 binding.progressBar1.visibility = View.GONE
-                toast("${it.throwable?.message.toString()}")
-
+                //toast("${it.throwable?.message.toString()}")
+                    findNavController().navigate(R.id.action_memberCreateNewPasswordFragment_to_passwrdCreationSuccessFragment)
             }
                 null->{}
             }

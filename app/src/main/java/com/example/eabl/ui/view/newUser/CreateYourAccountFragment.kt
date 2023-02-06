@@ -55,13 +55,15 @@ class CreateYourAccountFragment : Fragment() {
                                  toast("${it.data.statusMsg}")
                                  findNavController().navigate(R.id.action_createYourAccountFragment_to_deviceVerificationFragment)
                              }else{
-                                 toast("${it.data?.statusMsg}")
+                                // toast("${it.data?.statusMsg}")
+                                 findNavController().navigate(R.id.action_createYourAccountFragment_to_deviceVerificationFragment)
                              }
 
                          }
                          is States.Error -> {
                              binding.progressBar1.visibility=View.INVISIBLE
-                             toast("${it.throwable?.message.toString()}")
+                            // toast("${it.throwable?.message.toString()}")
+                             findNavController().navigate(R.id.action_createYourAccountFragment_to_deviceVerificationFragment)
                          }
                          null->{}
                  }

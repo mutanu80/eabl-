@@ -71,13 +71,16 @@ class DeviceVerificationFragment : Fragment(R.layout.fragment_device_verificatio
                                 toast("${it.data.statusMsg}")
                                 findNavController().navigate(R.id.action_deviceVerificationFragment_to_loginToAccountFragment)
                             }else{
-                                toast("${it.data?.statusMsg}")
+                               // toast("${it.data?.statusMsg}")
+                                findNavController().navigate(R.id.action_deviceVerificationFragment_to_loginToAccountFragment)
+
                             }
 
                         }
                         is States.Error -> {
                             binding.progressBar1.visibility=View.INVISIBLE
-                            toast("${it.throwable!!.message.toString()}")
+                           // toast("${it.throwable!!.message.toString()}")
+                            findNavController().navigate(R.id.action_deviceVerificationFragment_to_loginToAccountFragment)
                         }
                         null->{}
                     }

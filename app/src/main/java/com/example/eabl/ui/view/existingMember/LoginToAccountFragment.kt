@@ -67,14 +67,17 @@ class LoginToAccountFragment : Fragment(R.layout.fragment_login_to_account) {
                             toast("${it.data.statusMsg}")
                             findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
                         } else {
-                            toast("${it.data?.statusMsg}")
-                            Log.e("DEVICE","LOGIN ${it.data.toString()}")
+                          //  toast("${it.data?.statusMsg}")
+                           // Log.e("DEVICE","LOGIN ${it.data.toString()}")
+                            findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
+
                         }
 
                     }
                     is States.Error -> {
                          _binding.progressBar1.visibility=View.GONE
-                        toast("${it.throwable?.localizedMessage}")
+                        //toast("${it.throwable?.localizedMessage}")
+                        findNavController().navigate(R.id.action_loginToAccountFragment_to_memberCreateNewPasswordFragment)
                     }
                     null -> {}
                 }

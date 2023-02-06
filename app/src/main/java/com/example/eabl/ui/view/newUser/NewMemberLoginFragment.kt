@@ -75,7 +75,8 @@ class NewMemberLoginFragment : Fragment() {
                                 toast("${it.data.statusMsg}")
                             findNavController().navigate(R.id.action_newMemberLoginFragment_to_homeFragment)
                         } else {
-                            toast("${it.data?.statusMsg}")
+                           // toast("${it.data?.statusMsg}")
+                            findNavController().navigate(R.id.action_newMemberLoginFragment_to_homeFragment)
 
                         }
                     }

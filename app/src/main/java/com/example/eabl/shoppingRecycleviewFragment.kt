@@ -50,10 +50,10 @@ class shoppingRecycleviewFragment : Fragment() {
                 when (it) {
                     is States.Success -> {
                         // binding.progressBar1.visibility=View.INVISIBLE
-                        if(it.data?.statusCode==1){
+                        if (it.data?.statusCode == 1) {
                             inflateRecyclerView(it.data!!.products)
                             toast("${it.data.statusMsg}")
-                        }else{
+                        } else {
                             toast("${it.data?.statusMsg}")
                         }
 
@@ -62,7 +62,7 @@ class shoppingRecycleviewFragment : Fragment() {
                         // binding.progressBar1.visibility=View.INVISIBLE
                         toast("${it.throwable?.message.toString()}")
                     }
-                    null->{}
+                    null -> {}
                 }
             }
         }
